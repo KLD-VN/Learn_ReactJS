@@ -5,7 +5,6 @@ import './index.css';
 class Square extends React.Component { // Square call is controlled components
   render() {
     return (
-      // fill "X" when click button
       <button
         className="square"
         onClick={() => { this.props.onClick() }} // this.setState() -> require react render again component when click button
@@ -62,10 +61,14 @@ class Game extends React.Component {
   }
 
   handleClick(i) {
+    /**
+     * When you "go bank in time" and then make a new move from that point 
+     * -> throw away all the "future" history that would now become incorrect
+     */
     const history = this.state.history.slice(0, this.state.stepNumber + 1);
-    console.log(history)
     const current = history[history.length - 1];
     const squares = current.squares.slice();
+
     /**
      * Someone has won the game or if a Square is already filled -> can't fill value
      */
@@ -74,10 +77,10 @@ class Game extends React.Component {
     }
     squares[i] = this.state.xIsNext ? 'X' : 'O'; // If player first set X -> player next will set O
     this.setState({
-      history: history.concat([{
+      history: history.concat([{ // add the last changed state to history
         squares: squares,
       }]),
-      stepNumber: history.length,
+      stepNumber: history.length, 
       xIsNext: !this.state.xIsNext, // each time a player moves -> flipped (lật lại) to determine (xác định) which player goes next -> True or False
     })
   }
