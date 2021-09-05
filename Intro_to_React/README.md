@@ -23,7 +23,7 @@
 
 ## What is props?
  
-* props (property) tham số truyền vào component
+* props (property) tham số truyền vào component -> không nên thay đổi
 
 ```diff
 ! Note
@@ -32,4 +32,14 @@
 - Cách đặt tên props 
 + on[Event] -> prop sự kiện
 + handle[Event] -> method xử lý các sự kiện 
+```
+
+## What is state?
+
+* Biến lưu trữ giá trị trong component -> chỉ nên thay đổi trong component
+
+```diff
+- Để thu thập dữ liệu nhiều component con hoặc để hai component con giao tiếp với nhau, cần khai báo state được chia sẻ trong component cha mẹ.
+- Component cha có thể chuyển state cho component con bằng cách sử dụng props
+=> Giúp em component con đồng bộ với nhau và với component cha mẹ.
 ```
